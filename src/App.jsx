@@ -4,7 +4,7 @@ import ProjectDetails from './components/ProjectDetails.jsx';
 function App() {
   return (
     <>
-      <main className='h-screen my-8 flex gap-8'>
+      <main className='h-screen mt-8 flex gap-8'>
         <ProjectList />
         <ProjectDetails />
       </main>
