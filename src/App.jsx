@@ -1,10 +1,12 @@
-import ProjectList from './components/ProjectList';
+import ProjectList from './components/ProjectList.jsx';
+import ProjectDetails from './components/ProjectDetails.jsx';
 
 function App() {
   return (
     <>
       <main className='h-screen my-8 flex gap-8'>
         <ProjectList />
+        <ProjectDetails />
       </main>
     </>
   );
