@@ -1,11 +1,14 @@
-export default function ProjectList({ projects }) {
+export default function ProjectList({ projects, openModal }) {
   return (
     <section className='bg-stone-900 rounded-tr-2xl'>
       <div className='pl-16 w-96'>
         <h2 className='mt-20 mb-10 uppercase text-3xl font-semibold text-white'>
           Your Projects
         </h2>
-        <button className='px-6 py-2 rounded-md bg-stone-700 text-stone-400 hover:bg-stone-950'>
+        <button
+          className='px-6 py-2 rounded-md bg-stone-700 text-stone-400 hover:bg-stone-950'
+          onClick={openModal}
+        >
           + Add Project
         </button>
         <ul className='mt-10'>
