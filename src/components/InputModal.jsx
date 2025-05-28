@@ -30,7 +30,29 @@ export default forwardRef(function InputModal({ save }, ref) {
           Save
         </button>
       </div>
-      <h1 className='text-3xl p-32'>Inputs and labels to be added here</h1>
+      <form className='mt-8'>
+        <div className='mb-5'>
+          <label className='text-sm font-bold uppercase text-stone-500'>
+            Title
+          </label>
+          <input className='mt-1 w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600' />
+        </div>
+        <div className='mb-5'>
+          <label className='text-sm font-bold uppercase text-stone-500'>
+            Description
+          </label>
+          <textarea className='mt-1 w-full p-1 min-h-24 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600' />
+        </div>
+        <div className='mb-5'>
+          <label className='text-sm font-bold uppercase text-stone-500'>
+            Due Date
+          </label>
+          <input
+            type='date'
+            className='mt-1 w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600'
+          />
+        </div>
+      </form>
     </dialog>,
     document.getElementById('modal-root')
   );

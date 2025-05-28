@@ -25,7 +25,7 @@ function App() {
       <main className='h-screen mt-8 flex gap-8'>
         <InputModal ref={modal} save={handleSave} />
         <ProjectList projects={projects} openModal={handleOpenModal} />
-        <ProjectDetails />
+        <ProjectDetails openModal={handleOpenModal} />
       </main>
     </>
   );
