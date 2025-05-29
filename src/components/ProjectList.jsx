@@ -15,10 +15,10 @@ export default function ProjectList({ projects, openModal }) {
           {projects.map((project, index) => {
             return (
               <li
-                key={project.projectName + index}
+                key={project.title + index}
                 className='text-stone-400 text-lg py-2'
               >
-                {project.projectName}
+                {project.title}
               </li>
             );
           })}

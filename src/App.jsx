@@ -5,18 +5,17 @@ import ProjectDetails from './components/ProjectDetails.jsx';
 import InputModal from './components/InputModal.jsx';
 
 function App() {
-  const [projects, setProjects] = useState([
-    { projectName: 'Project 1' },
-    { projectName: 'Project 2' },
-  ]);
+  const [projects, setProjects] = useState([]);
   const modal = useRef();
 
   function handleOpenModal() {
     modal.current.open();
   }
 
-  function handleSave() {
-    // Save new project code goes here
+  function handleSave(title, description, date) {
+    setProjects((prevProjects) => {
+      return [...prevProjects, { title, description, date }];
+    });
     modal.current.close();
   }
 
