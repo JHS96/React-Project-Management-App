@@ -39,7 +39,9 @@ export default forwardRef(function InputModal({ save }, ref) {
 
   function handleCloseModal() {
     clearValues();
-    setIsValid(true);
+    setIsTitleValid(true);
+    setIsDescriptionValid(true);
+    setIsDateValid(true);
     dialog.current.close();
   }
 
