@@ -59,8 +59,23 @@ export default forwardRef(function InputModal({ save }, ref) {
     if (!date) setIsDateValid(false);
   }
 
+  function handleEscapeAndEnterKeys(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSaveBtnClick();
+      console.log('yes');
+    }
+    if (event.key === 'Escape') {
+      handleCloseModal();
+    }
+  }
+
   return createPortal(
-    <dialog ref={dialog} className='w-2/3 p-10 rounded-lg'>
+    <dialog
+      ref={dialog}
+      className='w-2/3 p-10 rounded-lg'
+      onKeyDown={(event) => handleEscapeAndEnterKeys(event)}
+    >
       <div className='flex justify-end gap-4'>
         <button onClick={handleCloseModal}>Cancel</button>
         <button
