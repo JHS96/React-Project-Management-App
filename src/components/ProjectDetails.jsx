@@ -1,6 +1,6 @@
 import logo from '../assets/no-projects.png';
 
-export default function ProjectDetails({ openModal }) {
+function DefaultContent({ launchModal }) {
   return (
     <section className='flex flex-col flex-auto items-center gap-8 pt-36'>
       <div className='w-20 h-20'>
@@ -18,10 +18,51 @@ export default function ProjectDetails({ openModal }) {
       </p>
       <button
         className='px-4 py-2 text-xs md:text-base rounded-md bg-stone-700 text-stone-400 hover:bg-stone-600 hover:text-stone-100'
-        onClick={openModal}
+        onClick={launchModal}
       >
         Create new project
       </button>
     </section>
+  );
+}
+
+function SelectedProjectDetails({ projectToDisplay, deleteHandler }) {
+  const title = projectToDisplay.project.title;
+  const dueDate = new Date(projectToDisplay.project.date).toDateString();
+  const description = projectToDisplay.project.description;
+
+  return (
+    <section className='w-full pt-20 flex flex-col items-start'>
+      <div className='w-5/6 flex justify-between'>
+        <h1 className='text-5xl text-stone-700 font-semibold'>{title}</h1>
+        <button
+          className='text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'
+          onClick={deleteHandler}
+        >
+          Delete
+        </button>
+      </div>
+      <p className='mt-4 text-xl text-stone-500'>{dueDate}</p>
+      <pre className='mt-4 text-xl text-stone-600'>{description}</pre>
+      <div className='mt-8 w-5/6 border-b-2 border-stone-300'></div>
+    </section>
+  );
+}
+
+export default function ProjectDetails({
+  openModal,
+  selectedProject,
+  deleteHandler,
+}) {
+  return (
+    <>
+      {!selectedProject.project && <DefaultContent launchModal={openModal} />}
+      {selectedProject.project && (
+        <SelectedProjectDetails
+          projectToDisplay={selectedProject}
+          deleteHandler={deleteHandler}
+        />
+      )}
+    </>
   );
 }

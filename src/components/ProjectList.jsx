@@ -1,4 +1,8 @@
-export default function ProjectList({ projects, openModal }) {
+export default function ProjectList({
+  projects,
+  openModal,
+  setSelectedProject,
+}) {
   return (
     <section className='bg-stone-900 rounded-tr-2xl'>
       <div className='pl-16 w-96'>
@@ -16,7 +20,8 @@ export default function ProjectList({ projects, openModal }) {
             return (
               <li
                 key={project.title + index}
-                className='text-stone-400 text-lg py-2'
+                className='text-stone-400 text-lg py-2 cursor-pointer'
+                onClick={() => setSelectedProject({ project, index })}
               >
                 {project.title}
               </li>
