@@ -10,14 +10,14 @@ export default forwardRef(function InputModal({ save }, ref) {
   const [isDescriptionValid, setIsDescriptionValid] = useState(true);
   const [isDateValid, setIsDateValid] = useState(true);
 
-  const titleClasses = `mt-1 w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600 ${
-    !isTitleValid && 'bg-red-200'
+  const titleClasses = `mt-1 w-full p-1 border-b-2 rounded-sm border-stone-300 text-stone-600 focus:outline-none focus:border-stone-600 ${
+    isTitleValid ? 'bg-stone-200' : 'bg-red-200'
   }`;
-  const descriptionClasses = `mt-1 w-full p-1 min-h-24 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600 ${
-    !isDescriptionValid && 'bg-red-200'
+  const descriptionClasses = `mt-1 w-full p-1 min-h-24 border-b-2 rounded-sm border-stone-300 text-stone-600 focus:outline-none focus:border-stone-600 ${
+    isDescriptionValid ? 'bg-stone-200' : 'bg-red-200'
   }`;
-  const dateClasses = `mt-1 w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600 ${
-    !isDateValid && 'bg-red-200'
+  const dateClasses = `mt-1 w-full p-1 border-b-2 rounded-sm border-stone-300 text-stone-600 focus:outline-none focus:border-stone-600 ${
+    isDateValid ? 'bg-stone-200' : 'bg-red-200'
   }`;
 
   useImperativeHandle(ref, () => {
