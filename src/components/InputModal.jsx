@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { act, forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export default forwardRef(function InputModal({ save }, ref) {
@@ -61,9 +61,12 @@ export default forwardRef(function InputModal({ save }, ref) {
 
   function handleEscapeAndEnterKeys(event) {
     if (event.key === 'Enter') {
-      event.preventDefault();
+      const activeElement = document.activeElement;
+      if (activeElement.id !== 'description') {
+        event.preventDefault();
+      }
+
       handleSaveBtnClick();
-      console.log('yes');
     }
     if (event.key === 'Escape') {
       handleCloseModal();
