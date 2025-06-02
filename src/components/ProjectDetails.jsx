@@ -44,7 +44,38 @@ function SelectedProjectDetails({ projectToDisplay, deleteHandler }) {
       </div>
       <p className='mt-4 text-xl text-stone-500'>{dueDate}</p>
       <pre className='mt-4 text-xl text-stone-600'>{description}</pre>
-      <div className='mt-8 w-5/6 border-b-2 border-stone-300'></div>
+      <div className='mt-5 mb-4 w-5/6 border-b-2 border-stone-300'></div>
+      <h2 className='text-3xl font-bold text-stone-700 mb-4'>Tasks</h2>
+      <div className='w-2/3 flex gap-4'>
+        <input
+          type='text'
+          className='mt-1 w-2/3 p-1 border-b-2 rounded-sm border-stone-300 text-stone-600 focus:outline-none focus:border-stone-600 bg-stone-200'
+        />
+        <button className='text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'>
+          Add Task
+        </button>
+      </div>
+      {projectToDisplay.project.tasks.length === 0 && (
+        <p className='mt-4 text-xl text-stone-600'>
+          This project does not have any tasks yet.
+        </p>
+      )}
+      {projectToDisplay.project.tasks.length !== 0 && (
+        <div className='w-5/6'>
+          <ul className='p-4 mt-8 rounded-md bg-stone-100'>
+            {projectToDisplay.project.tasks.map((task, index) => {
+              return (
+                <li key={index + task} className='flex justify-between my-4'>
+                  {task}
+                  <button className='text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'>
+                    Clear
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </section>
   );
 }

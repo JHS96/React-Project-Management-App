@@ -16,9 +16,13 @@ function App() {
     modal.current.open();
   }
 
+  //TODO => Write code to handle saving/deletion of tasks as the tasks array below just contains some hardcoded placeholder tasks
   function handleSave(title, description, date) {
     setProjects((prevProjects) => {
-      return [...prevProjects, { title, description, date }];
+      return [
+        ...prevProjects,
+        { title, description, date, tasks: ['Task 1', 'Task 2', 'Task 3'] },
+      ];
     });
     modal.current.close();
   }
