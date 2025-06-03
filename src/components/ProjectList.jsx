@@ -19,7 +19,7 @@ export default function ProjectList({
           {projects.map((project, index) => {
             return (
               <li
-                key={project.title + index}
+                key={Math.random() + index}
                 className='text-stone-400 text-lg py-2 cursor-pointer'
                 onClick={() => setSelectedProject({ project, index })}
               >

@@ -1,3 +1,5 @@
+import { useRef, useState } from 'react';
+
 import logo from '../assets/no-projects.png';
 
 function DefaultContent({ launchModal }) {
@@ -26,10 +28,26 @@ function DefaultContent({ launchModal }) {
   );
 }
 
-function SelectedProjectDetails({ projectToDisplay, deleteHandler }) {
+function SelectedProjectDetails({
+  projectToDisplay,
+  deleteProjectHandler,
+  saveNewTaskHandler,
+}) {
   const title = projectToDisplay.project.title;
   const dueDate = new Date(projectToDisplay.project.date).toDateString();
   const description = projectToDisplay.project.description;
+
+  const addTaskInputRef = useRef();
+  const [isNewTaskValid, setIsNewTaskValid] = useState(true);
+
+  function handleSaveNewTask() {
+    if (!addTaskInputRef.current.value) {
+      setIsNewTaskValid(false);
+      return;
+    }
+    saveNewTaskHandler(addTaskInputRef.current.value);
+    addTaskInputRef.current.value = '';
+  }
 
   return (
     <section className='w-full pt-20 flex flex-col items-start'>
@@ -37,7 +55,7 @@ function SelectedProjectDetails({ projectToDisplay, deleteHandler }) {
         <h1 className='text-5xl text-stone-700 font-semibold'>{title}</h1>
         <button
           className='text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'
-          onClick={deleteHandler}
+          onClick={deleteProjectHandler}
         >
           Delete
         </button>
@@ -46,15 +64,28 @@ function SelectedProjectDetails({ projectToDisplay, deleteHandler }) {
       <pre className='mt-4 text-xl text-stone-600'>{description}</pre>
       <div className='mt-5 mb-4 w-5/6 border-b-2 border-stone-300'></div>
       <h2 className='text-3xl font-bold text-stone-700 mb-4'>Tasks</h2>
-      <div className='w-2/3 flex gap-4'>
+      <form
+        className='w-2/3 flex gap-4'
+        onSubmit={(event) => {
+          event.preventDefault();
+        }}
+      >
         <input
+          ref={addTaskInputRef}
           type='text'
-          className='mt-1 w-2/3 p-1 border-b-2 rounded-sm border-stone-300 text-stone-600 focus:outline-none focus:border-stone-600 bg-stone-200'
+          id='add-task-input'
+          onChange={() => setIsNewTaskValid(true)}
+          className={`mt-1 w-2/3 p-1 border-b-2 rounded-sm border-stone-300 text-stone-600 focus:outline-none focus:border-stone-600 ${
+            isNewTaskValid ? 'bg-stone-200' : 'bg-red-200'
+          }`}
         />
-        <button className='text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'>
+        <button
+          className='text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'
+          onClick={handleSaveNewTask}
+        >
           Add Task
         </button>
-      </div>
+      </form>
       {projectToDisplay.project.tasks.length === 0 && (
         <p className='mt-4 text-xl text-stone-600'>
           This project does not have any tasks yet.
@@ -65,7 +96,10 @@ function SelectedProjectDetails({ projectToDisplay, deleteHandler }) {
           <ul className='p-4 mt-8 rounded-md bg-stone-100'>
             {projectToDisplay.project.tasks.map((task, index) => {
               return (
-                <li key={index + task} className='flex justify-between my-4'>
+                <li
+                  key={Math.random() + index}
+                  className='flex justify-between my-4'
+                >
                   {task}
                   <button className='text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'>
                     Clear
@@ -83,7 +117,8 @@ function SelectedProjectDetails({ projectToDisplay, deleteHandler }) {
 export default function ProjectDetails({
   openModal,
   selectedProject,
-  deleteHandler,
+  deleteProjectHandler,
+  saveNewTaskHandler,
 }) {
   return (
     <>
@@ -91,7 +126,8 @@ export default function ProjectDetails({
       {selectedProject.project && (
         <SelectedProjectDetails
           projectToDisplay={selectedProject}
-          deleteHandler={deleteHandler}
+          deleteProjectHandler={deleteProjectHandler}
+          saveNewTaskHandler={saveNewTaskHandler}
         />
       )}
     </>

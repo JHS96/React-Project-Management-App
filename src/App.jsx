@@ -16,28 +16,38 @@ function App() {
     modal.current.open();
   }
 
-  //TODO => Write code to handle saving/deletion of tasks as the tasks array below just contains some hardcoded placeholder tasks
-  function handleSave(title, description, date) {
+  function handleSaveNewProject(title, description, date) {
     setProjects((prevProjects) => {
-      return [
-        ...prevProjects,
-        { title, description, date, tasks: ['Task 1', 'Task 2', 'Task 3'] },
-      ];
+      return [...prevProjects, { title, description, date, tasks: [] }];
     });
     modal.current.close();
   }
 
-  function handleDelete() {
+  function handleDeleteProject() {
     setProjects((prevProjects) => {
       return prevProjects.filter((_, index) => index !== selectedProject.index);
     });
     setSelectedProject({ project: undefined, index: undefined });
   }
 
+  // TODO => Below function may need revision/improvement
+  function handleSaveNewTask(newTask) {
+    setProjects((prevProjects) => {
+      const curTasksArr = [...prevProjects[selectedProject.index].tasks];
+      curTasksArr.push(newTask);
+      return [
+        ...prevProjects,
+        (prevProjects[selectedProject.index].tasks = curTasksArr),
+      ];
+    });
+  }
+
+  //TODO => Write code to handle deletion of tasks
+
   return (
     <>
       <main className='h-screen mt-8 flex gap-8'>
-        <InputModal ref={modal} save={handleSave} />
+        <InputModal ref={modal} save={handleSaveNewProject} />
         <ProjectList
           projects={projects}
           openModal={handleOpenModal}
@@ -46,7 +56,8 @@ function App() {
         <ProjectDetails
           openModal={handleOpenModal}
           selectedProject={selectedProject}
-          deleteHandler={handleDelete}
+          deleteProjectHandler={handleDeleteProject}
+          saveNewTaskHandler={handleSaveNewTask}
         />
       </main>
     </>
