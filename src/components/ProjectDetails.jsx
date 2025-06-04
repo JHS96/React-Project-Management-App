@@ -32,6 +32,7 @@ function SelectedProjectDetails({
   projectToDisplay,
   deleteProjectHandler,
   saveNewTaskHandler,
+  deleteTaskHandler,
 }) {
   const title = projectToDisplay.project.title;
   const dueDate = new Date(projectToDisplay.project.date).toDateString();
@@ -101,7 +102,10 @@ function SelectedProjectDetails({
                   className='flex justify-between my-4'
                 >
                   {task}
-                  <button className='text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'>
+                  <button
+                    className='text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'
+                    onClick={() => deleteTaskHandler(index)}
+                  >
                     Clear
                   </button>
                 </li>
@@ -119,6 +123,7 @@ export default function ProjectDetails({
   selectedProject,
   deleteProjectHandler,
   saveNewTaskHandler,
+  deleteTaskHandler,
 }) {
   return (
     <>
@@ -128,6 +133,7 @@ export default function ProjectDetails({
           projectToDisplay={selectedProject}
           deleteProjectHandler={deleteProjectHandler}
           saveNewTaskHandler={saveNewTaskHandler}
+          deleteTaskHandler={deleteTaskHandler}
         />
       )}
     </>

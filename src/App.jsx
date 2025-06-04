@@ -42,7 +42,15 @@ function App() {
     });
   }
 
-  //TODO => Write code to handle deletion of tasks
+  // TODO => Below function may need revision/improvement
+  function handleDeleteTask(taskIndex) {
+    const updatedTasks = projects[selectedProject.index].tasks.filter(
+      (_, index) => index !== taskIndex
+    );
+    const curProjects = [...projects];
+    curProjects[selectedProject.index].tasks = updatedTasks;
+    setProjects(curProjects);
+  }
 
   return (
     <>
@@ -58,6 +66,7 @@ function App() {
           selectedProject={selectedProject}
           deleteProjectHandler={handleDeleteProject}
           saveNewTaskHandler={handleSaveNewTask}
+          deleteTaskHandler={handleDeleteTask}
         />
       </main>
     </>
