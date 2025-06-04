@@ -5,7 +5,7 @@ export default function ProjectList({
   selectedProjectIndex,
 }) {
   return (
-    <section className='bg-stone-900 rounded-tr-2xl'>
+    <section className='pb-8 bg-stone-900 rounded-tr-2xl'>
       <div className='pl-16 w-96'>
         <h2 className='mt-20 mb-10 uppercase text-3xl font-semibold text-white'>
           Your Projects
