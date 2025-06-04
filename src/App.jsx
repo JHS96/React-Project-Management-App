@@ -30,19 +30,15 @@ function App() {
     setSelectedProject({ project: undefined, index: undefined });
   }
 
-  // TODO => Below function may need revision/improvement
   function handleSaveNewTask(newTask) {
-    setProjects((prevProjects) => {
-      const curTasksArr = [...prevProjects[selectedProject.index].tasks];
-      curTasksArr.push(newTask);
-      return [
-        ...prevProjects,
-        (prevProjects[selectedProject.index].tasks = curTasksArr),
-      ];
-    });
+    const curTasks = [...projects[selectedProject.index].tasks];
+    const curProjects = [...projects];
+
+    curTasks.push(newTask);
+    curProjects[selectedProject.index].tasks = curTasks;
+    setProjects(curProjects);
   }
 
-  // TODO => Below function may need revision/improvement
   function handleDeleteTask(taskIndex) {
     const updatedTasks = projects[selectedProject.index].tasks.filter(
       (_, index) => index !== taskIndex
