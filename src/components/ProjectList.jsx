@@ -2,6 +2,7 @@ export default function ProjectList({
   projects,
   openModal,
   setSelectedProject,
+  selectedProjectIndex,
 }) {
   return (
     <section className='bg-stone-900 rounded-tr-2xl'>
@@ -20,7 +21,11 @@ export default function ProjectList({
             return (
               <li
                 key={Math.random() + index}
-                className='text-stone-400 text-lg py-2 cursor-pointer'
+                className={`${
+                  selectedProjectIndex === index
+                    ? 'text-stone-100'
+                    : 'text-stone-400'
+                } text-lg py-2 cursor-pointer`}
                 onClick={() => setSelectedProject({ project, index })}
               >
                 {project.title}

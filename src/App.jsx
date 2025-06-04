@@ -60,6 +60,7 @@ function App() {
           projects={projects}
           openModal={handleOpenModal}
           setSelectedProject={setSelectedProject}
+          selectedProjectIndex={selectedProject.index}
         />
         <ProjectDetails
           openModal={handleOpenModal}
