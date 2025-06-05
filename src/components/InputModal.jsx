@@ -1,4 +1,4 @@
-import { act, forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export default forwardRef(function InputModal({ save }, ref) {
