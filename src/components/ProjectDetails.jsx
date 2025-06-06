@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import logo from '../assets/no-projects.png';
 
@@ -38,16 +38,16 @@ function SelectedProjectDetails({
   const dueDate = new Date(projectToDisplay.project.date).toDateString();
   const description = projectToDisplay.project.description;
 
-  const addTaskInputRef = useRef();
+  const [newTask, setNewTask] = useState('');
   const [isNewTaskValid, setIsNewTaskValid] = useState(true);
 
   function handleSaveNewTask() {
-    if (!addTaskInputRef.current.value) {
+    if (!newTask) {
       setIsNewTaskValid(false);
       return;
     }
-    saveNewTaskHandler(addTaskInputRef.current.value);
-    addTaskInputRef.current.value = '';
+    saveNewTaskHandler(newTask);
+    setNewTask('');
   }
 
   return (
@@ -72,13 +72,16 @@ function SelectedProjectDetails({
         }}
       >
         <input
-          ref={addTaskInputRef}
           type='text'
           id='add-task-input'
-          onChange={() => setIsNewTaskValid(true)}
+          onChange={(e) => {
+            setNewTask(e.target.value);
+            setIsNewTaskValid(true);
+          }}
           className={`mt-1 w-2/3 p-1 border-b-2 rounded-sm border-stone-300 text-stone-600 focus:outline-none focus:border-stone-600 ${
             isNewTaskValid ? 'bg-stone-200' : 'bg-red-200'
           }`}
+          value={newTask}
         />
         <button
           className='text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'
@@ -99,7 +102,7 @@ function SelectedProjectDetails({
               return (
                 <li
                   key={Math.random() + index}
-                  className='flex justify-between my-4'
+                  className='flex justify-between mt-4 mb-1'
                 >
                   {task}
                   <button

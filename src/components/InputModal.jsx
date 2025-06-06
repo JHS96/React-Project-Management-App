@@ -3,9 +3,11 @@ import { createPortal } from 'react-dom';
 
 export default forwardRef(function InputModal({ save }, ref) {
   const dialog = useRef();
-  const titleRef = useRef();
-  const descriptionRef = useRef();
-  const dateRef = useRef();
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [date, setDate] = useState('');
+
   const [isTitleValid, setIsTitleValid] = useState(true);
   const [isDescriptionValid, setIsDescriptionValid] = useState(true);
   const [isDateValid, setIsDateValid] = useState(true);
@@ -32,9 +34,9 @@ export default forwardRef(function InputModal({ save }, ref) {
   });
 
   function clearValues() {
-    titleRef.current.value = '';
-    descriptionRef.current.value = '';
-    dateRef.current.value = '';
+    setTitle('');
+    setDescription('');
+    setDate('');
   }
 
   function handleCloseModal() {
@@ -46,10 +48,6 @@ export default forwardRef(function InputModal({ save }, ref) {
   }
 
   function handleSaveBtnClick() {
-    const title = titleRef.current.value;
-    const description = descriptionRef.current.value;
-    const date = dateRef.current.value;
-
     if (title !== '' && description !== '' && date !== '') {
       save(title, description, date);
       clearValues();
@@ -104,8 +102,11 @@ export default forwardRef(function InputModal({ save }, ref) {
           <input
             className={titleClasses}
             id='title'
-            ref={titleRef}
-            onChange={() => setIsTitleValid(true)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              setIsTitleValid(true);
+            }}
+            value={title}
           />
         </div>
         <div className='mb-5'>
@@ -118,8 +119,11 @@ export default forwardRef(function InputModal({ save }, ref) {
           <textarea
             className={descriptionClasses}
             id='description'
-            ref={descriptionRef}
-            onChange={() => setIsDescriptionValid(true)}
+            onChange={(e) => {
+              setDescription(e.target.value);
+              setIsDescriptionValid(true);
+            }}
+            value={description}
           />
         </div>
         <div className='mb-5'>
@@ -132,9 +136,12 @@ export default forwardRef(function InputModal({ save }, ref) {
           <input
             type='date'
             className={dateClasses}
-            ref={dateRef}
             id='date'
-            onChange={() => setIsDateValid(true)}
+            onChange={(e) => {
+              setDate(e.target.value);
+              setIsDateValid(true);
+            }}
+            value={date}
           />
         </div>
       </form>
